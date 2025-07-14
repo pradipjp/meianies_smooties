@@ -24,10 +24,11 @@ if ingredient_list:
     #st.text(ingredient_list)
     ingredient_string=''
     
-    for x in ingredient_list:
-        ingredient_string+=x+ ' '
-    #st.write(ingredient_string)    
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+    for fruit_chosen in ingredient_list:
+        ingredient_string+=fruit_chosen+ ' '
+    #st.write(ingredient_string)  
+        st.subheader(fruit_chosen+'Nutrition Information')
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/fruit_chosen")
         sf_df=st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
     my_insert_stmt = """INSERT INTO smoothies.public.orders (ingredients, name_on_order)
                     VALUES ('""" + ingredient_string + """', '""" + name_on_order + """')"""
